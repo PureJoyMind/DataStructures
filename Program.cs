@@ -7,16 +7,10 @@ namespace DataStructures
     {
         static void Main(string[] args)
         {
-            var stack = new Stack(10);
+            var stack = new Stack(5);
 
-            stack.Push("mazdak");
-            stack.Push(DateTime.Today);
-
-            stack.PrintStack();
-
-            Console.WriteLine(stack.Pop());
-            stack.PrintStack();
-
+            stack.Implementation();
         }
+
     }
 }
