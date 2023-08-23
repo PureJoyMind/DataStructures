@@ -13,11 +13,21 @@ namespace DataStructures
             //stack.Implementation();
 
             var arr = new int[] {12, 5, 2, 8, 10, 0, 13, 5, 7, 6, 4};
-            Write("our array before sort: ");
+
+            // bubble sort test
+            //Write("our array before bubble sort: ");
+            //PrintArray(arr);
+            //Sort.BubbleSort(arr);
+            //Write("our array after bubble sort: ");
+            //PrintArray(arr);
+
+             //selection sort test
+            Write("our array before selection sort: ");
             PrintArray(arr);
-            Sort.BubbleSort(arr);
-            Write("our array after sort: ");
+            Sort.SelectionSort(arr);
+            Write("our array after selection sort: ");
             PrintArray(arr);
+
         }
 
 
