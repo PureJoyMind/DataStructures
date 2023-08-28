@@ -49,6 +49,56 @@ namespace DataStructures
             var result = (BigInteger.Pow(10,n1) * ac) + (BigInteger.Pow(10,n1/2) * subtract) + bd;
 
             return result;
+
+/* added bigIntegers for operations
+var n1 = input1.Length;
+            var n2 = input2.Length;
+
+            if (n1 == 1 || n2 == 1)
+            {
+                return int.Parse(input1) * int.Parse(input2);
+            }
+
+            var n = n1 > n2 ? n1 : n2;
+
+            //int halfLength1 = input1.Length / 2;
+            //int halfLength2 = input2.Length / 2;
+            int halfLength = n / 2;
+
+            string bigA = input1.Substring(0, halfLength);
+            string bigB = input1.Substring(halfLength);
+            string bigC = input2.Substring(0, halfLength);
+            string bigD = input2.Substring(halfLength);
+
+            BigInteger a = BigInteger.Parse(bigA);
+            BigInteger b = BigInteger.Parse(bigB);
+            BigInteger c = BigInteger.Parse(bigC);
+            BigInteger d = BigInteger.Parse(bigD);
+
+            var ac = Karatsuba(bigA, bigC);
+            var bd = Karatsuba(bigB, bigD);
+            var third = Karatsuba(BigInteger.Add(a , b).ToString(), BigInteger.Add(c , d).ToString()); // ad + bc => (a+b)*(c+d)-ac-bd
+
+            //third - bd - ac;
+            var subtract1 = BigInteger.Subtract(third, bd);
+            var subtract = BigInteger.Subtract(subtract1, ac);
+
+            var nPower = Math.Pow(10, n);
+            var acTen = BigInteger.Multiply(ac, (BigInteger)nPower);
+
+            var halfNPower = Math.Pow(10, n / 2);
+            var subtractTen = BigInteger.Multiply(subtract, (BigInteger)halfNPower);
+
+            //acTen + subtractTen + bd;
+            var result = BigInteger.Add(acTen, subtractTen);
+            var final = BigInteger.Add(result, bd);
+
+            return final;
+            
+            
+            
+            */
+            
         }
 
         public static string FindSum(string str1, string str2)
