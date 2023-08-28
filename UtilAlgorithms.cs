@@ -4,7 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
+/*
+For Program.cs
+var a = "3141592653589793238462643383279502884197169399375105820974944592";
+var b = "2718281828459045235360287471352662497757247093699959574966967627";
 
+var test = UtilAlgorithms.Karatsuba(a,b).ToString();
+var test2 = UtilAlgorithms.Multiply(a,b);
+Console.WriteLine(test2);
+*/
 namespace DataStructures
 {
     public class UtilAlgorithms
