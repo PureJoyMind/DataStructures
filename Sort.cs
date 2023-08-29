@@ -57,5 +57,57 @@ namespace DataStructures
                 (arr[i], arr[min]) = (arr[min], arr[i]);
             }
         }
+
+        public static int[] MergeSort(int[] arr)
+        {
+            if(arr.Length == 1) return arr;
+
+            var arr1 = arr.Take(arr.Length / 2).ToArray();
+            var arr2 = arr.Skip(arr.Length / 2).ToArray();
+
+            var sorted = Merge(MergeSort(arr1), MergeSort(arr2));
+
+            return sorted;
+        }
+
+        static int[] Merge(int[] arr1, int[] arr2) // expects sorted array
+        {
+            var k = 0;
+            var merged = new int[arr2.Length + arr1.Length];
+            if (arr2.Length + arr1.Length == 2)
+            {
+                merged[0] = arr1[0];
+                merged[1] = arr2[0];
+            }
+
+            var i = 0;
+            var j = 0;
+            while (i < arr1.Length && j < arr2.Length)
+            {
+                if(i >= arr1.Length) break;
+                
+                if (arr1[i] < arr2[j])
+                {
+                    merged[k++] = arr1[i++];
+                }
+                else
+                {
+                    merged[k++] = arr2[j++];
+                }
+            }
+
+            while (i < arr1.Length)
+            {
+                merged[k++] = arr1[i++];
+            }
+
+            while (j < arr2.Length)
+            {
+                merged[k++] = arr2[j++];
+            }
+
+            return merged;
+        }
+
     }
 }
