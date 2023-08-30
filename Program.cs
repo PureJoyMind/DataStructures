@@ -28,6 +28,14 @@ namespace DataStructures
             Write("our array after selection sort: ");
             PrintArray(arr);
 
+
+            var merge = Sort.MergeSort(arr);
+
+            var inversion = UtilAlgorithms.CountInversionSort(arr);
+
+            WriteLine(string.Join(", ", inversion.ReturnedArr));
+            WriteLine(inversion.InversionCount);
+
         }
 
 
