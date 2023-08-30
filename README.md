@@ -9,3 +9,5 @@ I will be doing these in my free time.
 
 ## Algorithms
 * Sorts: Insertion sort,  Selection sort, Merge sort
+* Inversion Counter using merge sort
+    (i,j) => j < i
