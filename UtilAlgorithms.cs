@@ -58,8 +58,9 @@ namespace DataStructures
             {
                 merged[k++] = arr2.ReturnedArr[j++];
             }
-
-            var returning = new InversionCounter{ReturnedArr = merged, InversionCount = arr1.InversionCount + arr2.InversionCount + sorted};
+            var returning = new InversionCounter{ReturnedArr = merged,
+                InversionCount = arr1.InversionCount + arr2.InversionCount + sorted}; // Left inversion + Right inversion + Split inversion(merge)
+            
             return returning;
         }
 
