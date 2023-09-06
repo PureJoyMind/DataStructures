@@ -1,23 +1,17 @@
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using static System.Console;
 
-namespace DataStructures
+namespace DataStructures.Algorithms
 {
-
-    public class InversionCounter
+    public static class Inversions
     {
-        public int InversionCount { get; set; }
-        public int[] ReturnedArr { get; set; }
-    }
-
-    public class UtilAlgorithms
-    {
-
         public static InversionCounter CountInversionSort(int[] arr) // count the number of inversions and sort the array
         {
-            if (arr.Length == 1) return new InversionCounter{ReturnedArr = arr};
+            if (arr.Length == 1) return new InversionCounter { ReturnedArr = arr };
 
             var arr1Sorted = arr.Take(arr.Length / 2).ToArray();
             var arr2Sorted = arr.Skip(arr.Length / 2).ToArray();
@@ -60,16 +54,19 @@ namespace DataStructures
             {
                 merged[k++] = arr2.ReturnedArr[j++];
             }
-            var returning = new InversionCounter{ReturnedArr = merged,
-                InversionCount = arr1.InversionCount + arr2.InversionCount + sorted}; // Left inversion + Right inversion + Split inversion(merge)
-            
+            var returning = new InversionCounter
+            {
+                ReturnedArr = merged,
+                InversionCount = arr1.InversionCount + arr2.InversionCount + sorted
+            }; // Left inversion + Right inversion + Split inversion(merge)
+
             return returning;
         }
 
         public static void ImplementInversionCount(int[] arr = null)
         {
             // counting inversions test
-             Write($"{"Our array: ",-50}");
+            Write($"{"Our array: ",-50}");
             WriteLine(string.Join(", ", arr));
 
             var inversion = CountInversionSort(arr);
@@ -79,49 +76,11 @@ namespace DataStructures
             WriteLine(inversion.InversionCount);
         }
 
-        public static char? FirstNonRepeatedChar(string str) // Returns the first char in string that is not used more than once
+        public class InversionCounter
         {
-            var chars = new Dictionary<char, int>();
-            str = str.ToLower();
-            foreach (var c in str)
-            {
-                if (chars.ContainsKey(c))
-                {
-                    chars[c]++;
-                    continue;
-                }
-                chars.Add(c, 1);
-            }
-            return chars.Keys.First(x => chars[x] == 1);
+            public int InversionCount { get; set; }
+            public int[] ReturnedArr { get; set; }
         }
 
-        public static char? FirstRepeatedChar(string str) // Returns the first char in string that is used more than once
-        {
-            str = str.ToLower();
-            var chars = new HashSet<char>();
-            foreach (var c in str)
-            {
-                var notExists = chars.Add(c);
-                if (notExists == false)
-                {
-                    return c;
-                }
-            }
-
-            return null;
-        }
-
-        public static string DictionaryToString(Dictionary<char, int> dict)
-        {
-            return string.Join(" | ", dict.Select(x => $"{x.Key}: {x.Key}"));
-        }
-        public static string HashSetToString(HashSet<char> dict)
-        {
-            return string.Join(" | ", dict.Select(x => $"{x}"));
-        }
-        public static string HashSetToString(HashSet<int> dict)
-        {
-            return string.Join(" | ", dict.Select(x => $"{x}"));
-        }
     }
 }
