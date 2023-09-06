@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DataStructures.DataStructures;
 using static System.Console;
 
 namespace DataStructures
@@ -10,18 +11,13 @@ namespace DataStructures
     {
         static void Main(string[] args)
         {
-            var c = UtilAlgorithms.FirstRepeatedChar("rgenapple");
-            WriteLine(c);
-
-            var s = new HashSet<int>();
-            var arr = new int[] { 1, 2, 3, 1, 1, 2, 3, 4 };
-            foreach (var i in arr)
-            {
-                s.Add(i);
-            }
-            WriteLine(UtilAlgorithms.HashSetToString(s));
-
-
+            var hashTable = new CustomHashTable(10);
+            hashTable.Add(1, "john");
+            WriteLine(hashTable.Get(1));
+            var x = hashTable.Get(5);
+            WriteLine(x);
+            hashTable.Add(1, "maz");
+            WriteLine(hashTable.Get(1));
         }
     }
 }
