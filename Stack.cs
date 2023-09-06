@@ -62,8 +62,7 @@ namespace DataStructures
             Console.WriteLine();
         }
 
-        public static void StackImplementation() // Create an instance of this
-                                     // class for the method to work.
+        public static void StackImplementation() 
         {
             var s = new Stack(5);
             s.Push("mazdak");
