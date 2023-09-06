@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
 
 namespace DataStructures
 {
@@ -109,5 +110,41 @@ namespace DataStructures
             return merged;
         }
 
+
+        public static void ImplementBubbleSort(int[] arr = null)
+        {
+            arr = new int[] { 12, 5, 2, 8, 10, 0, 13, 5, 7, 6, 4, 1 };
+
+            // bubble sort test
+            Write($"{"our array before bubble sort:",-50}");
+            WriteLine(string.Join(", ", arr));
+            Sort.BubbleSort(arr);
+            Write($"{"our array after bubble sort:",-50}");
+            WriteLine(string.Join(", ", arr));
+        }
+
+        public static void ImplementSelectionSort(int[] arr = null)
+        {
+            arr = arr ?? new int[] { 12, 5, 2, 8, 10, 0, 13, 5, 7, 6, 4, 1 };
+
+            // selection sort test
+            Write($"{"our array before selection sort:",-50}");
+            WriteLine(string.Join(", ", arr));
+            Sort.SelectionSort(arr);
+            Write($"{"our array after selection sort:",-50}");
+            WriteLine(string.Join(", ", arr));
+        }
+
+        public static void MergeSortImplementation(int[] arr = null)
+        {
+            arr = arr ?? new int[] { 12, 5, 2, 8, 10, 0, 13, 5, 7, 6, 4, 1 };
+
+            // merge sort test
+            Write($"{"our array before merge sort: ",-50}");
+            WriteLine(string.Join(", ", arr));
+            var merge = Sort.MergeSort(arr);
+            Write($"{"our array after merge sort: ",-50}");
+            WriteLine(string.Join(", ", merge));
+        }
     }
 }

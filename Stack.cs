@@ -62,20 +62,21 @@ namespace DataStructures
             Console.WriteLine();
         }
 
-        public void Implementation() // Create an instance of this
+        public static void StackImplementation() // Create an instance of this
                                      // class for the method to work.
         {
-            this.Push("mazdak");
-            this.Push(DateTime.Today);
-            this.Push(5);
+            var s = new Stack(5);
+            s.Push("mazdak");
+            s.Push(DateTime.Today);
+            s.Push(5);
 
-            this.PrintStack();
+            s.PrintStack();
 
-            Console.WriteLine(this.Pop());
+            Console.WriteLine(s.Pop());
 
-            this.Clear();
+            s.Clear();
 
-            this.PrintStack();
+            s.PrintStack();
 
             //this.Pop();
         }

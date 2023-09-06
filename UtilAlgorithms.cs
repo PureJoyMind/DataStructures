@@ -1,5 +1,5 @@
 using System.Linq;
-
+using static System.Console;
 
 namespace DataStructures
 {
@@ -62,6 +62,19 @@ namespace DataStructures
                 InversionCount = arr1.InversionCount + arr2.InversionCount + sorted}; // Left inversion + Right inversion + Split inversion(merge)
             
             return returning;
+        }
+
+        public void ImplementInversionCount(int[] arr = null)
+        {
+            // counting inversions test
+             Write($"{"Our array: ",-50}");
+            WriteLine(string.Join(", ", arr));
+
+            var inversion = CountInversionSort(arr);
+
+            WriteLine(string.Join(", ", inversion.ReturnedArr));
+            Write($"{"The number of inversions in this array: ",-50}");
+            WriteLine(inversion.InversionCount);
         }
 
     }
