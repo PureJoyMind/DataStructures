@@ -13,11 +13,15 @@ namespace DataStructures
         {
             var hashTable = new CustomHashTable(10);
             hashTable.Add(1, "john");
-            WriteLine(hashTable.Get(1));
-            var x = hashTable.Get(5);
+            WriteLine(hashTable.GetValue(1));
+            var x = hashTable.GetValue(5);
             WriteLine(x);
             hashTable.Add(1, "maz");
-            WriteLine(hashTable.Get(1));
+            WriteLine(hashTable.GetValue(1));
+            hashTable.Add(4, "four");
+            WriteLine(hashTable.GetValue(4));
+            hashTable.Remove(4);
+            WriteLine(hashTable.GetValue(4));
         }
     }
 }

@@ -16,37 +16,56 @@ namespace DataStructures.DataStructures
 
         public void Add(int key, string value) // replace
         {
-            var hashIndex = Hash(key);
+            var bucket = GetBucket(key);
 
 
-            if (Entries[hashIndex] == null)
-                Entries[hashIndex] = new LinkedList<Entry>();
-
-            if (!string.IsNullOrEmpty(Get(key)))
+            if (bucket == null)
             {
-                var entry = (from pair in Entries[hashIndex] where pair.Key == key select pair).First();
-                entry.Value = value;
+                bucket = new LinkedList<Entry>();
+                Entries[Hash(key)] = bucket;
+                var entry = new Entry(key, value);
+                bucket.AddFirst(entry);
             }
             else
             {
-                var entry = new Entry(key, value);
-                Entries[hashIndex].AddFirst(entry);
+                var entry = (from pair in bucket where pair.Key == key select pair).First();
+                entry.Value = value;
             }
         }
 
-        public string Get(int key)
+        public string GetValue(int key)
         {
-            var hashIndex = Hash(key);
-            if (Entries[hashIndex] == null) return null;
-            if (Entries[hashIndex].Count == 0) return null;
+            var bucket = GetBucket(key);
+            if (bucket == null) return null;
+            if (bucket.Count == 0) return null;
             
-            return (from entry in Entries[hashIndex] where entry.Key == key select entry.Value).First();
+            return (from entry in bucket where entry.Key == key select entry.Value).First();
+        }
+
+        public Entry Get(int key)
+        {
+            var bucket = GetBucket(key);
+            if (bucket == null) return null;
+            if (bucket.Count == 0) return null;
+
+            return (from entry in bucket where entry.Key == key select entry).First();
+        }
+
+        public void Remove(int key)
+        {
+            var bucket = GetBucket(key); // Entries[hashIndex]
+            if (bucket == null) throw new ArgumentNullException();
+            var entry = Get(key);
+            if (entry == null) throw new KeyNotFoundException("Key not found.");
+            bucket.Remove(entry);
         }
 
         private int Hash(int key)
         {
             return Math.Abs(key % Entries.Length);
         }
+
+        private LinkedList<Entry> GetBucket(int key) => Entries[Hash(key)];
     }
 
     class Entry
