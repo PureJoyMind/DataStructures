@@ -23,6 +23,7 @@ namespace DataStructures.DataStructures
             {
                 bucket = new LinkedList<Entry>();
                 Entries[Hash(key)] = bucket;
+
                 var entry = new Entry(key, value);
                 bucket.AddFirst(entry);
             }
@@ -32,16 +33,6 @@ namespace DataStructures.DataStructures
                 entry.Value = value;
             }
         }
-
-        public string GetValue(int key)
-        {
-            var bucket = GetBucket(key);
-            if (bucket == null) return null;
-            if (bucket.Count == 0) return null;
-            
-            return (from entry in bucket where entry.Key == key select entry.Value).First();
-        }
-
         public Entry Get(int key)
         {
             var bucket = GetBucket(key);
@@ -50,21 +41,10 @@ namespace DataStructures.DataStructures
 
             return (from entry in bucket where entry.Key == key select entry).First();
         }
+        public string GetValue(int key) => Get(key)?.Value;
 
-        public void Remove(int key)
-        {
-            var bucket = GetBucket(key); // Entries[hashIndex]
-            if (bucket == null) throw new ArgumentNullException();
-            var entry = Get(key);
-            if (entry == null) throw new KeyNotFoundException("Key not found.");
-            bucket.Remove(entry);
-        }
-
-        private int Hash(int key)
-        {
-            return Math.Abs(key % Entries.Length);
-        }
-
+        public void Remove(int key) => GetBucket(key)?.Remove(Get(key));
+        private int Hash(int key) => Math.Abs(key % Entries.Length);
         private LinkedList<Entry> GetBucket(int key) => Entries[Hash(key)];
     }
 
