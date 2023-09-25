@@ -90,6 +90,7 @@ namespace DataStructures.DataStructures
             }
         }
 
+        public bool IsBinarySearchTree => CheckIfBinarySearchTree(_root, null, null);
 
         public bool Find(int value)
         {
@@ -121,7 +122,7 @@ namespace DataStructures.DataStructures
             }
         }
 
-        public virtual void Insert(int value)
+        public virtual void Insert(int value) // Inserts in the first empty node in level order traversal
         {
             if(_root is null)
             {
@@ -156,7 +157,6 @@ namespace DataStructures.DataStructures
 
             }
         }
-
 
         protected void TraversePreOrder(Node root)
         {
@@ -214,7 +214,6 @@ namespace DataStructures.DataStructures
             return 1 + Math.Max(GetTreeHeight(root.LeftChild), GetTreeHeight(root.RightChild));
         }
 
-
         public List<int> GetNodesAtDistance(int distance) // We can change the method to return the list and not a string 
         {
             var values = new List<int>();
@@ -235,6 +234,20 @@ namespace DataStructures.DataStructures
 
             GetNodesAtDistance(root.LeftChild, distance - 1, values);
             GetNodesAtDistance(root.RightChild, distance - 1, values);
+        }
+
+        protected bool CheckIfBinarySearchTree(Node root, int? leftBound = null, int? rightBound = null)
+        {
+            if (root is null) { return true; }
+            //if (root.HasChild == false) return true;
+
+            if (leftBound != null && root.Value < leftBound ) return false;
+            if (rightBound != null && root.Value > rightBound ) return false;
+
+            var left = CheckIfBinarySearchTree(root.LeftChild, leftBound, root.Value - 1);
+            var right = CheckIfBinarySearchTree(root.RightChild, root.Value + 1, rightBound);
+
+            return left && right;
         }
 
         public override bool Equals(object obj)

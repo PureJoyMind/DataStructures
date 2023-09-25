@@ -12,7 +12,7 @@ namespace DataStructures.DataStructures
     {
         public BinarySearchTree(int? value = null) : base(value) {}
 
-        public override void Insert(int value)
+        public override void Insert(int value) // Inserts in the right order
         {
             Node newValue = new Node(value);
             if (_root == null)
