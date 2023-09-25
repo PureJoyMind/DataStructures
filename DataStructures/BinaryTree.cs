@@ -16,13 +16,13 @@ namespace DataStructures.DataStructures
         }
 
         protected Node _root;
+        protected List<int> _traverseList;
+        
         public int? Root // In order to be able to read the root from the binary tree object without access to the tree
         {
             get => _root is null ? null : _root.Value;
             set => _root.Value = (int)value;
         }
-
-        protected List<int> _traverseList;
 
         public string PreOrder
         {
@@ -110,7 +110,10 @@ namespace DataStructures.DataStructures
             }
         }
 
-        
+        public virtual void Insert(int value)
+        {
+
+        }
 
 
         protected void TraversePreOrder(Node root)
@@ -158,6 +161,29 @@ namespace DataStructures.DataStructures
             if (root.HasChild == false) return 0;
 
             return 1 + Math.Max(GetTreeHeight(root.LeftChild), GetTreeHeight(root.RightChild));
+        }
+
+
+        public string GetNodesAtDistance(int distance) // We can change the method to return the list and not a string 
+        {
+            var values = new List<int>();
+            GetNodesAtDistance(_root, distance, values);
+
+            return string.Join(", ", values);
+        }
+        protected void GetNodesAtDistance(Node root, int distance, List<int> values)
+        {
+            if(root is null) return;
+            if (distance < 0) throw new ArgumentException("Distance Cannot be negative");
+            if (distance == 0) 
+            {
+                values.Add(root.Value);
+                return;
+            }
+
+
+            GetNodesAtDistance(root.LeftChild, distance - 1, values);
+            GetNodesAtDistance(root.RightChild, distance - 1, values);
         }
 
         public override bool Equals(object obj)

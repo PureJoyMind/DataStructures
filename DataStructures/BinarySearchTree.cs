@@ -12,7 +12,7 @@ namespace DataStructures.DataStructures
     {
         public BinarySearchTree(int? value = null) : base(value) {}
 
-        public void Insert(int value)
+        public override void Insert(int value)
         {
             Node newValue = new Node(value);
             if (_root == null)
@@ -54,5 +54,7 @@ namespace DataStructures.DataStructures
             }
 
         }
+
+        
     }
 }
