@@ -11,24 +11,25 @@ namespace DataStructures
     {
         static void Main(string[] args)
         {
-            BinaryTree bt = new BinaryTree();
-            //bt.Insert(7);
-            //bt.Insert(4);
-            //bt.Insert(9);
-            //bt.Insert(1);
-            //bt.Insert(6);
-            //bt.Insert(8);
-            //bt.Insert(10);
-            var root = bt.Root;
+            BinarySearchTree bt1 = new BinarySearchTree();
+            bt1.Insert(7);
+            bt1.Insert(4);
+            bt1.Insert(9);
+            bt1.Insert(1);
+            bt1.Insert(6);
+            bt1.Insert(8);
+            bt1.Insert(10);
 
-            bt.Find(12);
-            bt.Find(8);
+            BinarySearchTree bt2 = new BinarySearchTree();
+            //bt2.Insert(7);
+            //bt2.Insert(4);
+            //bt2.Insert(9);
+            //bt2.Insert(1);
+            //bt2.Insert(6);
+            //bt2.Insert(8);
+            //bt2.Insert(10);
 
-            WriteLine(bt.PreOrder);
-            WriteLine(bt.InOrder);
-            WriteLine(bt.PostOrder);
-
-            WriteLine(bt.Height);
+            WriteLine(bt2.Equals(bt1));
         }
     }
 }

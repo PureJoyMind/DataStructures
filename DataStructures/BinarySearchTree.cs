@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataStructures.DataStructures
 {
-    public class BinaryTree
+    public class BinarySearchTree
     {
         private Node _root;
         public int? Root // In order to be able to read the root from the binary tree object without access to the tree
@@ -52,8 +53,28 @@ namespace DataStructures.DataStructures
 
         public int Height => GetTreeHeight(_root);
 
+        public int Min
+        {
+            get
+            {
+                if (_root is null)
+                {
+                    throw new InvalidOperationException("The Binary search tree is empty.");
+                }
 
-        public BinaryTree(int? value = null)
+                var current = _root;
+                var last = current;
+                while (current != null)
+                {
+                    last = current;
+                    current = current.LeftChild;
+                }
+                return last.Value;
+            }
+        }
+
+
+        public BinarySearchTree(int? value = null)
         {
             _root = value is null ? null : new Node((int)value);
             _traverseList = new List<int>();
@@ -179,6 +200,18 @@ namespace DataStructures.DataStructures
             return 1 + Math.Max(GetTreeHeight(root.LeftChild), GetTreeHeight(root.RightChild));
         }
 
+        public override bool Equals(object obj)
+        {
+            var t2 = obj as BinarySearchTree;
+
+            if(t2 == null) return false;
+
+            var traverse1 = this.PreOrder;
+            var traverse2 = t2.PreOrder;
+
+            return traverse1 == traverse2;
+        }
+
         private class Node
         {
             public int Value { get; set; }
@@ -199,8 +232,5 @@ namespace DataStructures.DataStructures
                 return $@"Node: {Value}, Left: {(LeftChild is not null ? LeftChild.Value : "null")}, Right: {(RightChild is not null ? RightChild.Value : "null")}";
             }
         }
-
     }
-
-    
 }
