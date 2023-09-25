@@ -9,22 +9,64 @@ namespace DataStructures.DataStructures
 {
     public class BinaryTree
     {
-        public Node Root { get; set; }
-        public BinaryTree(Node root)
+        private Node _root;
+        public int Root // In order to be able to read the root from the binary tree object without access to the tree
         {
-            Root = root;
+            get => _root.Value;
+            set => _root.Value = value;
+        }
+
+        private List<int> _traverseList;
+
+        public string PreOrder {
+            get
+            {
+                TraversePreOrder(_root);
+                var ret = string.Join(", ", _traverseList);
+                _traverseList.Clear();
+                return ret;
+            }
+        }
+
+        public string InOrder
+        {
+            get
+            {
+                TraverseInOrder(_root);
+                var ret = string.Join(", ", _traverseList);
+                _traverseList.Clear();
+                return ret;
+            }
+        }
+
+        public string PostOrder
+        {
+            get
+            {
+                TraversePostOrder(_root);
+                var ret = string.Join(", ", _traverseList);
+                _traverseList.Clear();
+                return ret;
+            }
+        }
+
+
+        public BinaryTree(int? value = null)
+        {
+            _root = value is null ? null : new Node((int)value);
+            _traverseList = new List<int>();
         }
 
         public bool Find(int value)
         {
-            if (Root is null)
+            if (_root is null)
             {
                 return false;
             }
 
-            if (value == Root.Value) return true;
+            if (value == _root.Value) return true;
 
-            var current = Root;
+            var current = _root;
             while (true)
             {
                 if (current is null)
@@ -48,13 +90,13 @@ namespace DataStructures.DataStructures
         public void Insert(int value)
         {
             Node newValue = new Node(value);
-            if (Root == null)
+            if (_root == null)
             {
-                Root = new Node(value);
+                _root = new Node(value);
                 return;
             }
 
-            var current = Root;
+            var current = _root;
             Node parent = null;
             while (current is not null)
             {
@@ -88,47 +130,67 @@ namespace DataStructures.DataStructures
 
         }
 
-        public void PrintTree()
+        private void TraversePreOrder(Node root)
         {
-            PrintTree(Root, "");
-        }
-
-        private void PrintTree(Node node, string indent)
-        {
-            if (node == null)
+            // Root, Left, Right
+            if (root is null)
+            {
                 return;
+            }
 
-            // Print the right subtree with proper indentation
-            PrintTree(node.RightChild, indent + "      ");
+            _traverseList.Add(root.Value);
+            TraversePreOrder(root.LeftChild);
+            TraversePreOrder(root.RightChild);
+        }
 
-            // Print the current node with the current indentation
-            Console.WriteLine($"{indent}{node.Value}");
+        private void TraverseInOrder(Node root)
+        {
+            // Left, Root, Right
+            if (root is null)
+            {
+                return;
+            }
 
-            // Print the left subtree with proper indentation
-            PrintTree(node.LeftChild, indent + "      ");
+            TraverseInOrder(root.LeftChild);
+            _traverseList.Add(root.Value);
+            TraverseInOrder(root.RightChild);
+        }
+
+        private void TraversePostOrder(Node root)
+        {
+            // Left, Right, Root
+            if (root is null)
+            {
+                return;
+            }
+
+            TraversePostOrder(root.LeftChild);
+            TraversePostOrder(root.RightChild);
+            _traverseList.Add(root.Value);
+        }
+
+        private class Node
+        {
+            public int Value { get; set; }
+            public Node LeftChild { get; set; }
+            public Node RightChild { get; set; }
+
+            public bool HasChild => LeftChild != null || RightChild != null;
+
+            public Node(int value, Node leftChild = null, Node rightChild = null)
+            {
+                Value = value;
+                LeftChild = leftChild;
+                RightChild = rightChild;
+            }
+
+            public override string ToString()
+            {
+                return $@"Node: {Value}, Left: {(LeftChild is not null ? LeftChild.Value : "null")}, Right: {(RightChild is not null ? RightChild.Value : "null")}";
+            }
         }
 
     }
 
-    public class Node
-    {
-        public int Value { get; set; }
-        public Node LeftChild { get; set; }
-        public Node RightChild { get; set; }
-
-        public bool HasChild => LeftChild != null || RightChild != null;
-
-
-        public Node(int value, Node leftChild = null, Node rightChild = null)
-        {
-            Value = value;
-            LeftChild = leftChild;
-            RightChild = rightChild;
-        }
-
-        public override string ToString()
-        {
-            return $@"Node: {Value}, Left: {(LeftChild is not null ? LeftChild.Value : "null")}, Right: {(RightChild is not null ? RightChild.Value : "null")}";
-        }
-    }
+    
 }
