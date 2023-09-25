@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
 
 namespace DataStructures.DataStructures
 {
@@ -46,6 +47,21 @@ namespace DataStructures.DataStructures
         public void Remove(int key) => GetBucket(key)?.Remove(Get(key));
         private int Hash(int key) => Math.Abs(key % Entries.Length);
         private LinkedList<Entry> GetBucket(int key) => Entries[Hash(key)];
+
+        public void ImplementHashTable()
+        {
+            var hashTable = new CustomHashTable(10);
+            hashTable.Add(1, "john");
+            WriteLine(hashTable.GetValue(1));
+            var x = hashTable.GetValue(5);
+            WriteLine(x);
+            hashTable.Add(1, "maz");
+            WriteLine(hashTable.GetValue(1));
+            hashTable.Add(4, "four");
+            WriteLine(hashTable.GetValue(4));
+            hashTable.Remove(4);
+            WriteLine(hashTable.GetValue(4));
+        }
     }
 
     class Entry
