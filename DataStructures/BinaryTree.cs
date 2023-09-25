@@ -123,7 +123,38 @@ namespace DataStructures.DataStructures
 
         public virtual void Insert(int value)
         {
+            if(_root is null)
+            {
+                _root = new Node(value);
+                return;
+            };
+            if(_root.Value == value) return;
+            
+            var q = new Queue<Node>(); 
 
+            q.Enqueue(_root);
+
+            while (q.Count != 0)
+            {
+                var tmp = q.Peek();
+                q.Dequeue();
+
+                if (tmp.LeftChild == null)
+                {
+                    tmp.LeftChild = new Node(value);
+                    break;
+                }
+
+                q.Enqueue(tmp.LeftChild);
+
+                if (tmp.RightChild == null)
+                {
+                    tmp.RightChild = new Node(value);
+                    break;      
+                }
+                q.Enqueue(tmp.RightChild);
+
+            }
         }
 
 
