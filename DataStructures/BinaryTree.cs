@@ -57,6 +57,17 @@ namespace DataStructures.DataStructures
             }
         }
 
+        public string LevelOrder
+        {
+            get
+            {
+                TraverseLevelOrder(_root);
+                var ret = string.Join(", ", _traverseList);
+                _traverseList.Clear();
+                return ret;
+            }
+        }
+
         public int Height => GetTreeHeight(_root);
 
         public int Min
@@ -150,9 +161,18 @@ namespace DataStructures.DataStructures
                 return;
             }
 
-            TraversePostOrder(root.LeftChild);
-            TraversePostOrder(root.RightChild);
-            _traverseList.Add(root.Value);
+            
+        }
+
+        protected void TraverseLevelOrder(Node root) // Breadth first traversal
+        {
+            if(root is null) return;
+
+            for (int i = 0; i <= Height; i++)
+            {
+                _traverseList.AddRange(GetNodesAtDistance(i));
+            }
+
         }
 
         protected int GetTreeHeight(Node root) // Returns -1 if root is null
@@ -164,12 +184,12 @@ namespace DataStructures.DataStructures
         }
 
 
-        public string GetNodesAtDistance(int distance) // We can change the method to return the list and not a string 
+        public List<int> GetNodesAtDistance(int distance) // We can change the method to return the list and not a string 
         {
             var values = new List<int>();
             GetNodesAtDistance(_root, distance, values);
 
-            return string.Join(", ", values);
+            return values;
         }
         protected void GetNodesAtDistance(Node root, int distance, List<int> values)
         {

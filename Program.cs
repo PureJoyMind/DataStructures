@@ -20,7 +20,7 @@ namespace DataStructures
             bt1.Insert(8);
             bt1.Insert(10);
 
-            WriteLine(bt1.GetNodesAtDistance(3));
+            WriteLine(bt1.LevelOrder);
 
            
         }
