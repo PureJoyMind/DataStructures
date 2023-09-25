@@ -10,10 +10,10 @@ namespace DataStructures.DataStructures
     public class BinaryTree
     {
         private Node _root;
-        public int Root // In order to be able to read the root from the binary tree object without access to the tree
+        public int? Root // In order to be able to read the root from the binary tree object without access to the tree
         {
-            get => _root.Value;
-            set => _root.Value = value;
+            get => _root is null ? null : _root.Value;
+            set => _root.Value = (int)value;
         }
 
         private List<int> _traverseList;
@@ -49,6 +49,8 @@ namespace DataStructures.DataStructures
                 return ret;
             }
         }
+
+        public int Height => GetTreeHeight(_root);
 
 
         public BinaryTree(int? value = null)
@@ -167,6 +169,14 @@ namespace DataStructures.DataStructures
             TraversePostOrder(root.LeftChild);
             TraversePostOrder(root.RightChild);
             _traverseList.Add(root.Value);
+        }
+
+        private int GetTreeHeight(Node root) // Returns -1 if root is null
+        {
+            if (root is null) return -1;
+            if (root.HasChild == false) return 0;
+
+            return 1 + Math.Max(GetTreeHeight(root.LeftChild), GetTreeHeight(root.RightChild));
         }
 
         private class Node
