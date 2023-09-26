@@ -196,7 +196,9 @@ namespace DataStructures.DataStructures
                 return;
             }
 
-            
+            TraversePostOrder(root.LeftChild);
+            TraversePostOrder(root.RightChild);
+            _traverseList.Add(root.Value);
         }
 
         protected void TraverseLevelOrder(Node root) // Breadth first traversal
@@ -252,6 +254,25 @@ namespace DataStructures.DataStructures
             var right = CheckIfBinarySearchTree(root.RightChild, root.Value + 1, rightBound);
 
             return left && right;
+        }
+
+        public string GetTreeInfo()
+        {
+            StringBuilder info = new StringBuilder();
+            info.Append("Binary Tree Info:");
+            info.AppendLine();
+            info.Append("\t");
+            info.AppendFormat($"level: {LevelOrder,35}");
+            info.AppendLine();
+            info.Append("\t");
+            info.AppendFormat($"pre:{null,2} {PreOrder,35}");
+            info.AppendLine();
+            info.Append("\t");
+            info.AppendFormat($"in:{null,3} {InOrder,35}");
+            info.AppendLine();
+            info.Append("\t");
+            info.AppendFormat($"post:{null,1} {PostOrder,35}");
+            return info.ToString();
         }
 
         public override bool Equals(object obj)

@@ -12,29 +12,17 @@ namespace DataStructures
         static void Main(string[] args)
         {
             BinarySearchTree bt1 = new BinarySearchTree();
-            bt1.Insert(7);
-            bt1.Insert(4);
-            bt1.Insert(5);
-            bt1.Insert(1);
-            bt1.Insert(6);
-            bt1.Insert(8);
+            bt1.Insert(20);
             bt1.Insert(10);
-
-            BinaryTree bt2 = new BinaryTree();
-            bt2.Insert(7);
-            bt2.Insert(4);
-            bt2.Insert(5);
-            bt2.Insert(1);
-            bt2.Insert(6);
-            bt2.Insert(8);
-            bt2.Insert(10);
-
-            WriteLine($"bt1:\n\tlevel: {bt1.LevelOrder}\n\tpre: {bt1.PreOrder}\n\tin: {bt1.InOrder}");
-            WriteLine($"bt2:\n\tlevel: {bt2.LevelOrder}\n\tpre: {bt2.PreOrder}\n\tin: {bt2.InOrder}");
-
-            WriteLine(bt2.IsBinarySearchTree);
-            WriteLine(bt1.IsBinarySearchTree);
-
+            bt1.Insert(30);
+            bt1.Insert(6);
+            bt1.Insert(14);
+            bt1.Insert(24);
+            bt1.Insert(3);
+            bt1.Insert(8);
+            bt1.Insert(26);
+            
+            WriteLine(bt1.GetTreeInfo());
         }
     }
 }
