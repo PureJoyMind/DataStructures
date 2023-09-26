@@ -23,7 +23,7 @@ namespace DataStructures.DataStructures
 
             var current = _root;
             Node parent = null;
-            while (current is not null)
+            while (current != null)
             {
                 if (value == current.Value) return;
                 if (value < current.Value)

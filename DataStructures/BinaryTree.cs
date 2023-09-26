@@ -11,7 +11,7 @@ namespace DataStructures.DataStructures
 
         public BinaryTree(int? value = null)
         {
-            _root = value is null ? null : new Node((int)value);
+            _root = value == null ? null : new Node((int)value);
             _traverseList = new List<int>();
         }
 
@@ -20,7 +20,11 @@ namespace DataStructures.DataStructures
         
         public int? Root // In order to be able to read the root from the binary tree object without access to the tree
         {
-            get => _root is null ? null : _root.Value;
+            get
+            {
+                if(_root == null) return null;
+                else return _root.Value;
+            } 
             set => _root.Value = (int)value;
         }
 
@@ -74,7 +78,7 @@ namespace DataStructures.DataStructures
         {
             get
             {
-                if (_root is null)
+                if (_root == null)
                 {
                     throw new InvalidOperationException("The Binary search tree is empty.");
                 }
@@ -94,7 +98,7 @@ namespace DataStructures.DataStructures
 
         public bool Find(int value)
         {
-            if (_root is null)
+            if (_root == null)
             {
                 return false;
             }
@@ -104,7 +108,7 @@ namespace DataStructures.DataStructures
             var current = _root;
             while (true)
             {
-                if (current is null)
+                if (current == null)
                 {
                     return false;
                 }
@@ -124,7 +128,7 @@ namespace DataStructures.DataStructures
 
         public virtual void Insert(int value) // Inserts in the first empty node in level order traversal
         {
-            if(_root is null)
+            if(_root == null)
             {
                 _root = new Node(value);
                 return;
@@ -161,7 +165,7 @@ namespace DataStructures.DataStructures
         protected void TraversePreOrder(Node root)
         {
             // Root, Left, Right
-            if (root is null)
+            if (root == null)
             {
                 return;
             }
@@ -174,7 +178,7 @@ namespace DataStructures.DataStructures
         protected void TraverseInOrder(Node root)
         {
             // Left, Root, Right
-            if (root is null)
+            if (root == null)
             {
                 return;
             }
@@ -187,7 +191,7 @@ namespace DataStructures.DataStructures
         protected void TraversePostOrder(Node root)
         {
             // Left, Right, Root
-            if (root is null)
+            if (root == null)
             {
                 return;
             }
@@ -197,7 +201,7 @@ namespace DataStructures.DataStructures
 
         protected void TraverseLevelOrder(Node root) // Breadth first traversal
         {
-            if(root is null) return;
+            if(root == null) return;
 
             for (int i = 0; i <= Height; i++)
             {
@@ -206,9 +210,9 @@ namespace DataStructures.DataStructures
 
         }
 
-        protected int GetTreeHeight(Node root) // Returns -1 if root is null
+        protected int GetTreeHeight(Node root) // Returns -1 if root == null
         {
-            if (root is null) return -1;
+            if (root == null) return -1;
             if (root.HasChild == false) return 0;
 
             return 1 + Math.Max(GetTreeHeight(root.LeftChild), GetTreeHeight(root.RightChild));
@@ -223,7 +227,7 @@ namespace DataStructures.DataStructures
         }
         protected void GetNodesAtDistance(Node root, int distance, List<int> values)
         {
-            if(root is null) return;
+            if(root == null) return;
             if (distance < 0) throw new ArgumentException("Distance Cannot be negative");
             if (distance == 0) 
             {
@@ -238,7 +242,7 @@ namespace DataStructures.DataStructures
 
         protected bool CheckIfBinarySearchTree(Node root, int? leftBound = null, int? rightBound = null)
         {
-            if (root is null) { return true; }
+            if (root == null) { return true; }
             //if (root.HasChild == false) return true;
 
             if (leftBound != null && root.Value < leftBound ) return false;
@@ -279,7 +283,15 @@ namespace DataStructures.DataStructures
 
             public override string ToString()
             {
-                return $@"Node: {Value}, Left: {(LeftChild is not null ? LeftChild.Value : "null")}, Right: {(RightChild is not null ? RightChild.Value : "null")}";
+                string l;
+                string r;
+                if (LeftChild != null) l = LeftChild.Value.ToString();
+                else l = "null";
+
+                if (RightChild != null) r = RightChild.Value.ToString();
+                else r = "null";
+                
+                return $"Node: {Value}, Left: {l}, Right: {r}";
             }
         }
     }
