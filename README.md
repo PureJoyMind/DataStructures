@@ -6,10 +6,22 @@ I will be doing these in my free time.
 # Current list of contents:
 ## Data Sructures:
 ### Stack
-### HashTable using Chaining for collision handling
+#### Stack Mehods:
+* Push(object item): Add item to the top of the stack.
+* Pop: Remove the item at the top of the stack.
+* Clear: Clear the stack.
+* PrintStack: Print the current items in the stack.
+* StackImplementation: Just an implementation of the stacks methods. 
+### CustomHashTable using Chaining for collision handling:
+#### HashTable Methods:
+* Add(int key, string value): Add a key value set to the table.
+* Get(int key): Get the Entry object of the requested key.
+* GetValue(int key): Get the value of the requested key.
+* Remove(int key): Remove the Entry object with the given key from the table.
+* ImplementHashTable: Just an implementation of the tables methods. 
 ### Binary Tree & Binary Search Tree:
 The main difference between the two classes is the Insert() method. 
-#### Properties
+#### Binary Tree Properties
 * Root: The root node of the Binary Tree.
 * PreOrder: a Depth-first pre-order traversal of the Binary Tree represented in a string format. (Root, Left, Right)
 * InOrder:  a Depth-first in-order traversal of the Binary Tree represented in a string format. (Left, Root, Right)
@@ -19,7 +31,7 @@ The main difference between the two classes is the Insert() method.
 * Min: Gets the current minimum value in the tree.
 * IsBinarySearchTree: Returns true if the current tree object is a binary search tree.
 
-#### Methods
+#### Binary Tree Methods
 * Find(int value): Returns true if the value argument exists in the tree.
 * BinarySearchTree.Insert(int value): Adds the value in the correct node in the tree which means: The root node is ***Always*** bigger than its left child and smaller than its right child.
 * BinaryTree.Insert(int value): Traverses the tree in level order and inserts the value in the first empty child from left children to right.
